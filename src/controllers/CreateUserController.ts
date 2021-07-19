@@ -1,0 +1,26 @@
+// -> Server -> Controller -> Service -> Repositorio -> BD
+import{Request,Response} from "express"
+import { CreateUserService } from "../services/CreateUserService"
+
+class CreateUserController{
+  async handle(request:Request,response:Response){
+   // try{
+      const{ name,email,adm,password }=request.body
+
+      const createUserService = new CreateUserService()
+  
+      const user = await createUserService.execute({name,email,adm,password})
+  
+      return response.json(user)
+    //}catch(err){
+    //  return response.status(400).json({
+    //    error:err.message
+    //  })
+    //}
+  }
+}
+export{CreateUserController}
+/**
+ * server -> routes -> Controller -> Service (throw new error)
+ * 
+ */
